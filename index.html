@@ -27,7 +27,7 @@
       text-align: center;
       background:
         linear-gradient(rgba(45, 41, 37, .18), rgba(45, 41, 37, .52)),
-        url("full_wedding_06.jpg") center 44% / cover no-repeat;
+        url("ALBUM_OUTPUT/images/wedding_06.jpg") center 44% / cover no-repeat;
       color: white;
     }
     .hero-inner { animation: rise 1.2s ease both; }
@@ -70,6 +70,15 @@
       margin: 0;
       color: #756c64;
       font: 15px/1.8 Arial, sans-serif;
+    }
+    .all-photos-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--rose);
+      font: 600 12px/1.5 Arial, sans-serif;
+      letter-spacing: .08em;
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
     .filters {
       display: flex;
@@ -190,6 +199,7 @@
     <section class="intro">
       <h2>Moments to remember</h2>
       <p>A collection of candid moments and beautiful memories from the celebration.</p>
+      <a class="all-photos-link" href="all-photos.html">Browse all 10,410 camera previews</a>
     </section>
 
     <nav class="filters" aria-label="Photo categories">
@@ -238,7 +248,7 @@
         card.className = "card";
         card.style.animationDelay = `${Math.min(index * 35, 350)}ms`;
         card.innerHTML = `
-          <img src="thumb_${name}.jpg" alt="${category(name)} wedding photo ${index + 1}" loading="lazy">
+          <img src="ALBUM_OUTPUT/thumbs/${name}.jpg" alt="${category(name)} wedding photo ${index + 1}" loading="lazy">
           <figcaption class="card-label">${category(name)}</figcaption>`;
         card.addEventListener("click", () => openLightbox(index));
         gallery.appendChild(card);
@@ -247,7 +257,7 @@
 
     function openLightbox(index) {
       current = index;
-      lbImage.src = `full_${visible[current]}.jpg`;
+      lbImage.src = `ALBUM_OUTPUT/images/${visible[current]}.jpg`;
       lbImage.alt = `${category(visible[current])} wedding photo`;
       lightbox.classList.add("open");
       document.body.style.overflow = "hidden";
