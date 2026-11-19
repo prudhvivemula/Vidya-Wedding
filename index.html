@@ -26,11 +26,19 @@
       place-items: center;
       text-align: center;
       background:
-        linear-gradient(rgba(45, 41, 37, .18), rgba(45, 41, 37, .52)),
-        url("ALBUM_OUTPUT/images/wedding_06.jpg") center 44% / cover no-repeat;
+        linear-gradient(180deg, rgba(33, 27, 24, .24), rgba(33, 27, 24, .64)),
+        url("full_wedding_06.jpg") center 44% / cover no-repeat;
       color: white;
     }
-    .hero-inner { animation: rise 1.2s ease both; }
+    .hero-inner {
+      width: min(760px, calc(100% - 32px));
+      padding: 46px 32px;
+      border: 1px solid rgba(255,255,255,.42);
+      outline: 1px solid rgba(255,255,255,.22);
+      outline-offset: 8px;
+      text-shadow: 0 2px 24px rgba(0,0,0,.24);
+      animation: rise 1.2s ease both;
+    }
     .eyebrow {
       margin: 0 0 16px;
       font: 600 12px/1.2 Arial, sans-serif;
@@ -54,6 +62,22 @@
       font: 500 13px/1.4 Arial, sans-serif;
       letter-spacing: .24em;
       text-transform: uppercase;
+    }
+    .hero-link {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 13px 22px;
+      border: 1px solid rgba(255,255,255,.82);
+      color: white;
+      font: 600 11px/1 Arial, sans-serif;
+      letter-spacing: .16em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background .2s, color .2s;
+    }
+    .hero-link:hover, .hero-link:focus-visible {
+      background: white;
+      color: var(--ink);
     }
     main { max-width: 1280px; margin: auto; padding: 48px 28px 80px; }
     .intro {
@@ -112,7 +136,8 @@
       break-inside: avoid;
       margin: 0 0 16px;
       overflow: hidden;
-      background: #e6dfd4;
+      background: var(--white);
+      box-shadow: 0 8px 24px rgba(54, 43, 34, .08);
       cursor: zoom-in;
       animation: appear .55s ease both;
     }
@@ -177,6 +202,7 @@
     @keyframes appear { from { opacity: 0; transform: translateY(8px); } }
     @media (max-width: 700px) {
       .hero { min-height: 62vh; }
+      .hero-inner { padding: 38px 18px; }
       main { padding: 38px 12px 60px; }
       .gallery { columns: 2 140px; column-gap: 8px; }
       .card { margin-bottom: 8px; }
@@ -192,6 +218,7 @@
       <p class="eyebrow">The Wedding Album</p>
       <h1>Bride <span class="ampersand">&amp;</span> Groom</h1>
       <p class="date">A celebration of love</p>
+      <a class="hero-link" href="#gallery">Explore the album</a>
     </div>
   </header>
 
@@ -248,7 +275,7 @@
         card.className = "card";
         card.style.animationDelay = `${Math.min(index * 35, 350)}ms`;
         card.innerHTML = `
-          <img src="ALBUM_OUTPUT/thumbs/${name}.jpg" alt="${category(name)} wedding photo ${index + 1}" loading="lazy">
+          <img src="thumb_${name}.jpg" alt="${category(name)} wedding photo ${index + 1}" loading="lazy">
           <figcaption class="card-label">${category(name)}</figcaption>`;
         card.addEventListener("click", () => openLightbox(index));
         gallery.appendChild(card);
@@ -257,7 +284,7 @@
 
     function openLightbox(index) {
       current = index;
-      lbImage.src = `ALBUM_OUTPUT/images/${visible[current]}.jpg`;
+      lbImage.src = `full_${visible[current]}.jpg`;
       lbImage.alt = `${category(visible[current])} wedding photo`;
       lightbox.classList.add("open");
       document.body.style.overflow = "hidden";
